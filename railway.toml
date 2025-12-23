@@ -1,6 +1,5 @@
 [build]
 builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
 
 [deploy]
 healthcheckPath = "/health"
@@ -9,11 +8,17 @@ restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
 
 [variables]
+# Database connection
 SURREAL_URL = "ws://${{surrealdb.RAILWAY_PRIVATE_DOMAIN}}:8000/rpc"
 SURREAL_USER = "root"
 SURREAL_PASSWORD = "root"
 SURREAL_NAMESPACE = "open_notebook"
 SURREAL_DATABASE = "production"
+
+# AI Provider API Keys (set at least one)
 OPENAI_API_KEY = ""
 ANTHROPIC_API_KEY = ""
 GOOGLE_API_KEY = ""
+
+# Optional: Password protect your instance
+OPEN_NOTEBOOK_PASSWORD = ""
