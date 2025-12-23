@@ -1,0 +1,32 @@
+# global options
+{
+	admin off
+	persist_config off
+	auto_https off
+	log {
+		format json
+	}
+	servers {
+		trusted_proxies static private_ranges 100.0.0.0/8
+	}
+}
+
+:{$PORT} {
+	log {
+		format json
+	}
+
+	# API endpoint
+	handle /api/* {
+		reverse_proxy {$API_ENDPOINT} {
+			header_up Host {upstream_hostport}
+			lb_try_duration 30s
+			lb_try_interval 100ms
+		}
+	}
+
+	# Main frontend
+	reverse_proxy /* {$WEB_ENDPOINT} {
+		header_up Host {upstream_hostport}
+	}
+}
