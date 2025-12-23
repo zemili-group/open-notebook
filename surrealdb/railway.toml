@@ -6,3 +6,6 @@ watchPatterns = ["surrealdb/**"]
 [deploy]
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
+
+[variables]
+RAILWAY_DOCKERFILE_PATH = "surrealdb/Dockerfile"
